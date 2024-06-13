@@ -2,9 +2,9 @@
 
 npm install -g degit
 
-npx degit jawnta/test-vue your-project-name
+npx degit jawnta/test-vue web
 
-cd your-project-name
+cd web
 
 npm i
 
