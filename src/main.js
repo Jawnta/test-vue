@@ -1,20 +1,20 @@
-import { createApp } from 'vue';
-import App from './App.vue';
-import vuetify from './plugins/vuetify';
-import { createRouter, createWebHistory } from 'vue-router';
+/**
+ * main.js
+ *
+ * Bootstraps Vuetify and other plugins then mounts the App`
+ */
 
-const router = createRouter({
-  history: createWebHistory(),
-  routes: [
-    {
-      path: '/',
-      name: 'Home',
-      component: () => import('./components/HelloWorld.vue'),
-    },
-  ],
-});
+// Plugins
+import { registerPlugins } from '@/plugins'
 
-const app = createApp(App);
-app.use(vuetify);
-app.use(router);
-app.mount('#app');
+// Components
+import App from './App.vue'
+
+// Composables
+import { createApp } from 'vue'
+
+const app = createApp(App)
+
+registerPlugins(app)
+
+app.mount('#app')
