@@ -5,7 +5,7 @@ import path from 'path';
 // Function to get the dynamic proxy target
 function getProxyTarget(): string {
   // Resolve the path to your JSON file
-  const configPath = path.resolve(__dirname, '../dynappconfig.json');
+  const configPath = path.resolve(__dirname, '../../dynappconfig.json');
   // Read the JSON file
   const rawData = fs.readFileSync(configPath, 'utf-8');
   // Parse the JSON data
