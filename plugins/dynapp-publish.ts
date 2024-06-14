@@ -5,7 +5,7 @@ export default function dynappPublish(): Plugin {
     name: 'dynapp-publish',
     apply: 'build',
     closeBundle() {
-      if (process.env.npm_config_publish) {
+      if (process.env.pnpm_config_publish) {
         console.log('Publish flag detected! Running publish tasks...');
       }
     }

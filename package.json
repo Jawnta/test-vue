@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "build:publish": "npm run build -- --publish",
+    "build:publish": "node ./plugins/prebuild.js --publish",
     "preview": "vite preview",
     "lint": "eslint . --fix --ignore-path .gitignore"
   },
@@ -27,14 +27,16 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-vue": "^9.22.0",
+    "pinia": "^2.1.7",
     "sass": "^1.71.1",
     "typescript": "^5.4.2",
+    "unplugin-auto-import": "^0.17.5",
     "unplugin-fonts": "^1.1.1",
     "unplugin-vue-components": "^0.26.0",
     "unplugin-vue-router": "^0.8.4",
     "vite": "^5.1.5",
-    "vite-plugin-vuetify": "^2.0.3",
     "vite-plugin-vue-layouts": "^0.11.0",
+    "vite-plugin-vuetify": "^2.0.3",
     "vue-router": "^4.3.0",
     "vue-tsc": "^2.0.6"
   }
