@@ -5,6 +5,8 @@ import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 import ViteFonts from 'unplugin-fonts/vite'
 import VueRouter from 'unplugin-vue-router/vite'
 import dynamicProxyPlugin from './plugins/dynamic-proxy-plugin'
+import dynappPublish from './plugins/dynapp-publish'
+
 // Utilities
 import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
@@ -33,6 +35,7 @@ export default defineConfig({
       },
     }),
     dynamicProxyPlugin(),
+    dynappPublish()
   ],
   define: { 'process.env': {} },
   resolve: {
