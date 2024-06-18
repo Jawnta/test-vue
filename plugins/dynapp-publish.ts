@@ -84,16 +84,22 @@ const uploadDataItems = async (dynappConfig, prefix, files, distFolder) => {
 
   const uploadQueue = [...files];
   const spinner = ora(`Publishing to ${prefix}...`).start();
-  while (uploadQueue.length > 0) {
-    const file = uploadQueue.pop();
-    try {
-      await uploadDataItem(dynappConfig, path.join(distFolder, file), prefix + file);
-    } catch (error) {
-      spinner.fail(`Failed to upload: ${error}`)
-      throw new Error(`Failed to upload file ${file}: ${error.message}`);
-    }
+
+  try {
+    await Promise.all(uploadQueue.map(async (file) => {
+      try {
+        await uploadDataItem(dynappConfig, path.join(distFolder, file), prefix + file);
+      } catch (error) {
+        spinner.fail(`Failed to upload: ${error}`);
+        throw new Error(`Failed to upload file ${file}: ${error.message}`);
+      }
+    }));
+    spinner.succeed(`Successfully published to ${prefix}!`);
+  } catch (error) {
+    spinner.fail(`Publishing failed.`);
+    throw error;
   }
-  spinner.succeed(`Successfully published to ${prefix}!`)
+
   return null;
 };
 
@@ -159,8 +165,8 @@ export default function dynappPublish(): Plugin {
         const prefix = await setPrefix("Prefix:", "web") + "/";
         const isPublish = await willPublish(`Do you want to publish to: ${url}/${prefix}? (Y/N) `);
         if (isPublish === "y") {
-          clearDataItems(dynappConfig, prefix)
-          uploadDataItems(dynappConfig, prefix, distFiles, distFolder)
+          await clearDataItems(dynappConfig, prefix)
+          await uploadDataItems(dynappConfig, prefix, distFiles, distFolder)
           return
         }
         return
