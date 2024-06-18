@@ -167,6 +167,8 @@ export default function dynappPublish(): Plugin {
         if (isPublish === "y") {
           await clearDataItems(dynappConfig, prefix)
           await uploadDataItems(dynappConfig, prefix, distFiles, distFolder)
+          const publicUrl = `${dynappConfig.baseUrl}dynapp-server/public/${dynappConfig.group}/${dynappConfig.app}/${prefix}`;
+          console.log(`We think your public url is: ${publicUrl}`)
           return
         }
         return
