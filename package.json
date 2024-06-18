@@ -12,7 +12,11 @@
   "dependencies": {
     "@mdi/font": "6.2.95",
     "core-js": "^3.34.0",
+    "fs-extra": "^11.2.0",
+    "mime-types": "^2.1.35",
+    "ora": "^8.0.1",
     "roboto-fontface": "*",
+    "url-join": "^5.0.0",
     "vue": "^3.4.21",
     "vuetify": "^3.5.8"
   },
