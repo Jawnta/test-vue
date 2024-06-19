@@ -1,5 +1,5 @@
 export const apiUrl = (path: any) => {
-    const mode = import.meta.env.VITE_MODE;
+    const mode = import.meta.env.MODE;
     const { location } = window;
     let baseUrl;
   
