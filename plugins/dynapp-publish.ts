@@ -27,14 +27,26 @@ const getDistFiles = (folder) => {
 }
 
 const getDynapConfig = () => {
-    // Resolve the path to your JSON file
-    const configPath = path.resolve(__dirname, '../../dynappconfig.json');
-    // Read the JSON file
-    const rawData = fs.readFileSync(configPath, 'utf-8');
-    // Parse the JSON data
-    const config = JSON.parse(rawData);
-    return config
-}
+  const findConfigFile = (currentDir) => {
+    const configPath = path.join(currentDir, 'dynappconfig.json');
+    
+    if (fs.existsSync(configPath)) {
+      const rawData = fs.readFileSync(configPath, 'utf-8');
+      return JSON.parse(rawData);
+    }
+
+    const parentDir = path.dirname(currentDir);
+
+    if (currentDir === parentDir) {
+      console.error('dynappconfig.json not found in any parent directories.');
+      return null;
+    }
+
+    return findConfigFile(parentDir);
+  };
+
+  return findConfigFile(__dirname);
+};
 
 const dataItemsBaseUrl = (dynappConfig) => {
   return urlJoin(dynappConfig.baseUrl, 'dynapp-server/rest/groups', dynappConfig.group, 'apps', dynappConfig.app)

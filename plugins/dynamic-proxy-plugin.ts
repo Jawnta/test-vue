@@ -2,14 +2,32 @@ import { Plugin } from 'vite';
 import fs from 'fs';
 import path from 'path';
 
+const getDynappConfig = () => {
+  
+  const findConfigFile = (currentDir) => {
+    const configPath = path.join(currentDir, 'dynappconfig.json');
+    
+    if (fs.existsSync(configPath)) {
+      const rawData = fs.readFileSync(configPath, 'utf-8');
+      return JSON.parse(rawData);
+    }
+
+    const parentDir = path.dirname(currentDir);
+
+    if (currentDir === parentDir) {
+      throw new Error('\n\n\ndynappconfig.json not found in any parent directories.\n\n\n');
+    }
+
+    return findConfigFile(parentDir);
+  };
+
+  return findConfigFile(__dirname);
+};
+
 // Function to get the dynamic proxy target
 function getProxyTarget(): string {
   // Resolve the path to your JSON file
-  const configPath = path.resolve(__dirname, '../../dynappconfig.json');
-  // Read the JSON file
-  const rawData = fs.readFileSync(configPath, 'utf-8');
-  // Parse the JSON data
-  const config = JSON.parse(rawData);
+  const  config = getDynappConfig();
 
   // Extract the necessary values
   const group = config.group;
