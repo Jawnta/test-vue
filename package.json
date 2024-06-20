@@ -1,13 +1,14 @@
 {
-  "name": "vuetify-project",
+  "name": "test-vue",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "build:publish": "node ./plugins/prebuild.js --publish",
     "preview": "vite preview",
     "lint": "eslint . --fix --ignore-path .gitignore",
-    "postinstall": "node postinstall.js"
+    "postinstall": "node postinstall.js",
+    "build:publish": "vue-tsc --noEmit && vite build && dynapp-publish",
+    "d-publish": "dynapp-publish"
   },
   "dependencies": {
     "@mdi/font": "6.2.95",
