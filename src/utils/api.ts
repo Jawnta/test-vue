@@ -8,10 +8,10 @@ export const apiUrl = (path: any) => {
       const matches = location.pathname.match(pattern);
   
       baseUrl = matches
-        ? `${location.origin}/dynapp-server/public/${matches[1]}/${matches[2]}/`
+        ? `${location.origin}/dynapp-server/public/${matches[1]}/${matches[2]}`
         : `../`;
     } else {
-      baseUrl = `${location.origin}/dynapp-server/`;
+      baseUrl = `${location.origin}/dynapp-server`;
     }
   
     return `${baseUrl}${path}`;
